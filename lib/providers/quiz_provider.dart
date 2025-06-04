@@ -1,5 +1,7 @@
 // providers/quiz_provider.dart
 import 'package:flutter/material.dart';
+import 'package:tugas_akhir/database/database_helper.dart';
+import 'package:tugas_akhir/models/quiz_subject.dart';
 
 import '../models/question.dart';
 import '../models/user_answer.dart';
@@ -9,9 +11,15 @@ class QuizProvider with ChangeNotifier {
   List<UserAnswer> _userAnswers = [];
   int _currentQuestionIndex = 0;
   bool _quizCompleted = false;
+  List<QuizSubject> _getAllSubjects = [];
+
+  bool _isLoadingQuizSubject = false;
+
+  bool get isLoadingQuizSubject => _isLoadingQuizSubject;
 
   List<Question> get questions => _questions;
   List<UserAnswer> get userAnswers => _userAnswers;
+  List<QuizSubject> get getAllSubjects => _getAllSubjects;
   int get currentQuestionIndex => _currentQuestionIndex;
   bool get quizCompleted => _quizCompleted;
   bool get allQuestionsAnswered =>
@@ -82,5 +90,13 @@ class QuizProvider with ChangeNotifier {
     final score = (correctAnswers / _userAnswers.length * 10).round();
 
     return {'correct': correctAnswers, 'wrong': wrongAnswers, 'score': score};
+  }
+
+  getDataQuizSubject() async {
+    _isLoadingQuizSubject = true;
+    notifyListeners();
+    _getAllSubjects = await DatabaseHelper.instance.getAllSubjects();
+    _isLoadingQuizSubject = false;
+    notifyListeners();
   }
 }

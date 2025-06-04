@@ -17,23 +17,25 @@ class QuizScreen extends StatefulWidget {
   });
 
   @override
-  _QuizScreenState createState() => _QuizScreenState();
+  QuizScreenState createState() => QuizScreenState();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
+class QuizScreenState extends State<QuizScreen> {
   late TimerProvider _timerProvider;
 
   @override
   void initState() {
     super.initState();
-    _timerProvider = Provider.of<TimerProvider>(context, listen: false);
-    _timerProvider.startTimer();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _timerProvider = Provider.of<TimerProvider>(context, listen: false);
+      _timerProvider.startTimer();
 
-    final quizProvider = Provider.of<QuizProvider>(context, listen: false);
-    quizProvider.initializeQuiz(widget.questions);
+      final quizProvider = Provider.of<QuizProvider>(context, listen: false);
+      quizProvider.initializeQuiz(widget.questions);
 
-    // Start timer
-    _startCountdown();
+      // Start timer
+      _startCountdown();
+    });
   }
 
   void _startCountdown() {
