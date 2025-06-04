@@ -23,6 +23,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Kuis Pembelajaran',
         theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white,
+            // foregroundColor: Colors.white,
+          ),
+          scaffoldBackgroundColor: Colors.white,
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
