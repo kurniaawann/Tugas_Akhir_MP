@@ -92,11 +92,18 @@ class QuizProvider with ChangeNotifier {
     return {'correct': correctAnswers, 'wrong': wrongAnswers, 'score': score};
   }
 
-  getDataQuizSubject() async {
+  void getDataQuizSubject() async {
     _isLoadingQuizSubject = true;
     notifyListeners();
     _getAllSubjects = await DatabaseHelper.instance.getAllSubjects();
     _isLoadingQuizSubject = false;
     notifyListeners();
+  }
+
+  Future<List<Question>> getQuestionsForSubject(int subjectId) async {
+    final result = await DatabaseHelper.instance.getQuestionsBySubject(
+      subjectId,
+    );
+    return result;
   }
 }

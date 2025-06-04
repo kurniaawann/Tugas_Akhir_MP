@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tugas_akhir/providers/quiz_provider.dart';
-
-import '../database/database_helper.dart';
-import 'quiz_screen.dart';
+import 'package:tugas_akhir/screens/quiz_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -48,16 +46,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ListTile(
                       title: Text(subject.name),
                       onTap: () async {
-                        final questions = await DatabaseHelper.instance
-                            .getQuestionsBySubject(subject.id);
+                        // First get the questions asynchronously
+                        final questions = await provider.getQuestionsForSubject(
+                          subject.id,
+                        );
+
+                        // Then check if widget is still mounted
                         if (!context.mounted) return;
+
+                        // Finally navigate with the obtained questions
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder:
                                 (_) => QuizScreen(
                                   subjectName: subject.name,
-                                  questions: questions,
+                                  questions:
+                                      questions, // Use the pre-fetched questions here
                                 ),
                           ),
                         );
