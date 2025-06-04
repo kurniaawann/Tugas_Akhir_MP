@@ -31,7 +31,6 @@ class DatabaseHelper {
       CREATE TABLE subjects (
         id INTEGER PRIMARY KEY,
         name TEXT,
-        icon TEXT
       )
     ''');
 
@@ -53,9 +52,9 @@ class DatabaseHelper {
   Future _insertSampleData(Database db) async {
     // Insert subjects
     final subjects = [
-      QuizSubject(id: 1, name: 'Matematika', icon: '➕'),
-      QuizSubject(id: 2, name: 'Bahasa Indonesia', icon: '📖'),
-      QuizSubject(id: 3, name: 'IPA', icon: '🔬'),
+      QuizSubject(id: 1, name: 'Matematika'),
+      QuizSubject(id: 2, name: 'Bahasa Indonesia'),
+      QuizSubject(id: 3, name: 'IPA'),
     ];
 
     for (var subject in subjects) {
@@ -77,7 +76,6 @@ class DatabaseHelper {
       return QuizSubject(
         id: maps[i]['id'] as int,
         name: maps[i]['name'] as String,
-        icon: maps[i]['icon'] as String,
       );
     });
   }

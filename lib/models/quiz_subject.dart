@@ -1,11 +1,10 @@
 class QuizSubject {
   final int id;
   final String name;
-  final String icon;
 
-  QuizSubject({required this.id, required this.name, required this.icon});
+  QuizSubject({required this.id, required this.name});
 
   Map<String, dynamic> toMap() {
-    return {'id': id, 'name': name, 'icon': icon};
+    return {'id': id, 'name': name};
   }
 }
