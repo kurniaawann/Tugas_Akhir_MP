@@ -35,7 +35,11 @@ class _HomeScreenState extends State<HomeScreen> {
         surfaceTintColor: Colors.blue[50],
       ),
       body:
-          subjects.isEmpty
+          provider.isLoadingQuizSubject
+              ? Center(
+                child: CircularProgressIndicator(color: Colors.blue[800]),
+              )
+              : subjects.isEmpty
               ? Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
