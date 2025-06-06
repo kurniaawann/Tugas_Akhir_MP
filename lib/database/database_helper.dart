@@ -36,7 +36,7 @@ class DatabaseHelper {
 
     await db.execute('''
       CREATE TABLE questions (
-        id INTEGER PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         subjectId INTEGER,
         questionText TEXT,
         options TEXT,
@@ -55,16 +55,29 @@ class DatabaseHelper {
       QuizSubject(id: 1, name: 'Matematika'),
       QuizSubject(id: 2, name: 'Bahasa Indonesia'),
       QuizSubject(id: 3, name: 'IPA'),
+      QuizSubject(id: 4, name: 'PPKN'),
+      QuizSubject(id: 5, name: 'PAI'),
+      QuizSubject(id: 6, name: 'Seni Budaya'),
+      QuizSubject(id: 7, name: 'PJOK'),
+      QuizSubject(id: 8, name: 'Bahasa Inggris'),
     ];
 
     for (var subject in subjects) {
       await db.insert('subjects', subject.toMap());
     }
 
-    // Insert questions for Matematika
-    final quizMatematika = sampeQuizMatematika();
+    // Insert questions
+    final allQuestions = [
+      ...sampelQuizMatematika(),
+      ...sampleQuizBahasaIndonesia(),
+      ...sampleQuizIPA(),
+      ...sampleQuizPPKN(),
+      ...sampleQuizSeniBudaya(),
+      ...sampleQuizPJOK(),
+      ...sampleQuizBahasaInggris(),
+    ];
 
-    for (var question in quizMatematika) {
+    for (var question in allQuestions) {
       await db.insert('questions', question.toMap());
     }
   }
