@@ -163,6 +163,14 @@ class _HomeScreenState extends State<HomeScreen> {
         return HomeImageAsset.matematika;
       case 'ipa':
         return HomeImageAsset.ipa;
+      case 'ppkn':
+        return HomeImageAsset.ppkn;
+      case 'seni budaya':
+        return HomeImageAsset.seniBudaya;
+      case 'pjok':
+        return HomeImageAsset.pjok;
+      case 'bahasa inggris':
+        return HomeImageAsset.bahasaInggris;
       default:
         return HomeImageAsset.bahasaIndonesia;
     }
@@ -176,6 +184,14 @@ class _HomeScreenState extends State<HomeScreen> {
         return Colors.purple[100]!;
       case 'ipa':
         return Colors.blue[100]!;
+      case 'ppkn':
+        return Colors.orange[100]!;
+      case 'seni budaya':
+        return Colors.pink[100]!;
+      case 'pjok':
+        return Colors.teal[100]!;
+      case 'bahasa inggris':
+        return Colors.red[100]!;
       default:
         return Colors.yellow[100]!;
     }
