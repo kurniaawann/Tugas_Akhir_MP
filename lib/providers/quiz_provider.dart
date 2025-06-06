@@ -31,7 +31,7 @@ class QuizProvider with ChangeNotifier {
         questions
             .map(
               (q) => UserAnswer(
-                questionId: q.id,
+                questionId: q.id!,
                 selectedAnswerIndex: null,
                 isCorrect: false,
               ),
@@ -49,7 +49,7 @@ class QuizProvider with ChangeNotifier {
     final isCorrect = answerIndex == question.correctAnswerIndex;
 
     _userAnswers[_currentQuestionIndex] = UserAnswer(
-      questionId: question.id,
+      questionId: question.id!,
       selectedAnswerIndex: answerIndex,
       isCorrect: isCorrect,
     );
