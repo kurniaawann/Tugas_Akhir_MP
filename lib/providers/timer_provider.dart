@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class TimerProvider with ChangeNotifier {
   int _remainingSeconds = 1800; // 30 menit
+  // int _remainingSeconds = 5; // untuk testing
   bool _timeIsUp = false;
 
   int get remainingSeconds => _remainingSeconds;
@@ -15,7 +16,15 @@ class TimerProvider with ChangeNotifier {
 
   void startTimer() {
     _timeIsUp = false;
-    _remainingSeconds = 1800;
+    _remainingSeconds = 1800; // uncomment untuk production
+    // _remainingSeconds = 5; // untuk testing
+    notifyListeners();
+  }
+
+  void resetTimer() {
+    _timeIsUp = false;
+    _remainingSeconds = 1800; // uncomment untuk production
+    // _remainingSeconds = 5; // untuk testing
     notifyListeners();
   }
 
@@ -23,7 +32,7 @@ class TimerProvider with ChangeNotifier {
     if (_remainingSeconds > 0) {
       _remainingSeconds--;
       notifyListeners();
-    } else {
+    } else if (!_timeIsUp) {
       _timeIsUp = true;
       notifyListeners();
     }
