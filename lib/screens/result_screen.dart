@@ -4,17 +4,19 @@ class ResultScreen extends StatelessWidget {
   final int correctAnswers;
   final int wrongAnswers;
   final int score;
+  final int questionCount;
 
   const ResultScreen({
     super.key,
     required this.correctAnswers,
     required this.wrongAnswers,
     required this.score,
+    required this.questionCount,
   });
 
   @override
   Widget build(BuildContext context) {
-    final scorePercentage = (score / 10) * 100;
+    final scorePercentage = (score / questionCount) * 100;
     final isExcellent = scorePercentage >= 80;
     final isGood = scorePercentage >= 60;
 
@@ -127,7 +129,7 @@ class ResultScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      '$score/10',
+                      '${score / questionCount}',
                       style: const TextStyle(
                         fontSize: 48,
                         fontWeight: FontWeight.bold,
