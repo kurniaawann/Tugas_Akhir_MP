@@ -230,11 +230,7 @@ class QuizScreenState extends State<QuizScreen> {
             Container(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Colors.blue[400]!, Colors.purple[400]!],
-                ),
+                color: Color(0xFFF564A9),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
@@ -252,22 +248,15 @@ class QuizScreenState extends State<QuizScreen> {
             // Question card
             Expanded(
               child: Card(
+                color: Colors.blue[300],
                 elevation: 4,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16.0),
                 ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      // colors: [Colors.white, Colors.grey[50]!],
-                      colors: [Colors.blue[400]!, Colors.purple[400]!],
-                    ),
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  padding: const EdgeInsets.all(20.0),
-                  child: SingleChildScrollView(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    // padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -388,163 +377,153 @@ class QuizScreenState extends State<QuizScreen> {
 
             // Navigation controls
             Card(
+              color: Colors.white,
               elevation: 2,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.0),
               ),
 
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    // colors: [Colors.white, Colors.grey[50]!],
-                    colors: [Colors.blue[400]!, Colors.purple[400]!],
-                  ),
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      // Question bubbles
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: List.generate(quizProvider.questions.length, (
-                          index,
-                        ) {
-                          final isAnswered =
-                              quizProvider
-                                  .userAnswers[index]
-                                  .selectedAnswerIndex !=
-                              null;
-                          final isCurrent =
-                              index == quizProvider.currentQuestionIndex;
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    // Question bubbles
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: List.generate(quizProvider.questions.length, (
+                        index,
+                      ) {
+                        final isAnswered =
+                            quizProvider
+                                .userAnswers[index]
+                                .selectedAnswerIndex !=
+                            null;
+                        final isCurrent =
+                            index == quizProvider.currentQuestionIndex;
 
-                          return GestureDetector(
-                            onTap: () => quizProvider.goToQuestion(index),
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color:
-                                    isCurrent
-                                        ? Colors.blue[400]
-                                        : isAnswered
-                                        ? Color(0xFFF564A9)
-                                        : Colors.grey[300],
-                                borderRadius: BorderRadius.circular(12),
-                                boxShadow:
-                                    isCurrent
-                                        ? [
-                                          BoxShadow(
-                                            color: Colors.blue.withOpacity(0.4),
-                                            spreadRadius: 2,
-                                            blurRadius: 4,
-                                            offset: const Offset(0, 2),
-                                          ),
-                                        ]
-                                        : null,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  '${index + 1}',
-                                  style: TextStyle(
-                                    color:
-                                        isCurrent || isAnswered
-                                            ? Colors.white
-                                            : Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                        return GestureDetector(
+                          onTap: () => quizProvider.goToQuestion(index),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color:
+                                  isCurrent
+                                      ? Colors.blue[400]
+                                      : isAnswered
+                                      ? Color(0xFFF564A9)
+                                      : Colors.grey[300],
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow:
+                                  isCurrent
+                                      ? [
+                                        BoxShadow(
+                                          color: Colors.blue.withOpacity(0.4),
+                                          spreadRadius: 2,
+                                          blurRadius: 4,
+                                          offset: const Offset(0, 2),
+                                        ),
+                                      ]
+                                      : null,
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${index + 1}',
+                                style: TextStyle(
+                                  color:
+                                      isCurrent || isAnswered
+                                          ? Colors.white
+                                          : Colors.black,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                          );
-                        }),
-                      ),
-                      const SizedBox(height: 16),
-
-                      // Navigation buttons
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              // disabledBackgroundColor: Colors.white,
-                              backgroundColor: Colors.white,
-                              foregroundColor: Colors.blue,
-                              shape:
-                                  quizProvider.currentQuestionIndex > 0
-                                      ? RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        side: const BorderSide(
-                                          color: Colors.blue,
-                                        ),
-                                      )
-                                      : RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 24,
-                                vertical: 12,
-                              ),
-                              elevation: 0,
-                            ),
-                            onPressed:
-                                quizProvider.currentQuestionIndex > 0
-                                    ? () => quizProvider.previousQuestion()
-                                    : null,
-                            child: const Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(Icons.arrow_back_ios),
-                                SizedBox(width: 8),
-                                Text('Sebelumnya'),
-                              ],
-                            ),
                           ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              foregroundColor: Colors.blue,
-                              shape:
-                                  quizProvider.currentQuestionIndex <
-                                          quizProvider.questions.length - 1
-                                      ? RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        side: const BorderSide(
-                                          color: Colors.blue,
-                                        ),
-                                      )
-                                      : RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
+                        );
+                      }),
+                    ),
+                    const SizedBox(height: 16),
+
+                    // Navigation buttons
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            // disabledBackgroundColor: Colors.white,
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.blue,
+                            shape:
+                                quizProvider.currentQuestionIndex > 0
+                                    ? RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      side: const BorderSide(
+                                        color: Colors.blue,
                                       ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 24,
-                                vertical: 12,
-                              ),
-                              elevation: 0,
+                                    )
+                                    : RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24,
+                              vertical: 12,
                             ),
-                            onPressed:
+                            elevation: 0,
+                          ),
+                          onPressed:
+                              quizProvider.currentQuestionIndex > 0
+                                  ? () => quizProvider.previousQuestion()
+                                  : null,
+                          child: const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(Icons.arrow_back_ios),
+                              SizedBox(width: 8),
+                              Text('Sebelumnya'),
+                            ],
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.blue,
+                            shape:
                                 quizProvider.currentQuestionIndex <
                                         quizProvider.questions.length - 1
-                                    ? () => quizProvider.nextQuestion()
-                                    : null,
-                            child: const Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text('Selanjutnya'),
-                                SizedBox(width: 8),
-                                Icon(Icons.arrow_forward_ios),
-                              ],
+                                    ? RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      side: const BorderSide(
+                                        color: Colors.blue,
+                                      ),
+                                    )
+                                    : RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24,
+                              vertical: 12,
                             ),
+                            elevation: 0,
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                          onPressed:
+                              quizProvider.currentQuestionIndex <
+                                      quizProvider.questions.length - 1
+                                  ? () => quizProvider.nextQuestion()
+                                  : null,
+                          child: const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('Selanjutnya'),
+                              SizedBox(width: 8),
+                              Icon(Icons.arrow_forward_ios),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
