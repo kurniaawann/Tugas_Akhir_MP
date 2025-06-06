@@ -129,7 +129,7 @@ class ResultScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      '${score / questionCount}',
+                      scorePercentage.toStringAsFixed(0),
                       style: const TextStyle(
                         fontSize: 48,
                         fontWeight: FontWeight.bold,
