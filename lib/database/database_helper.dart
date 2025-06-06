@@ -30,7 +30,7 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE subjects (
         id INTEGER PRIMARY KEY,
-        name TEXT,
+        name TEXT
       )
     ''');
 
