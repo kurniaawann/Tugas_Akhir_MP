@@ -251,7 +251,7 @@ class QuizScreenState extends State<QuizScreen> {
                 color: Colors.blue[300],
                 elevation: 4,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: SingleChildScrollView(
                   child: Padding(
@@ -380,7 +380,7 @@ class QuizScreenState extends State<QuizScreen> {
               color: Colors.white,
               elevation: 2,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.0),
+                borderRadius: BorderRadius.circular(10),
               ),
 
               child: Padding(
@@ -552,6 +552,7 @@ class QuizScreenState extends State<QuizScreen> {
                     MaterialPageRoute(
                       builder:
                           (context) => ResultScreen(
+                            questionCount: quizProvider.questions.length,
                             correctAnswers: results['correct'],
                             wrongAnswers: results['wrong'],
                             score: results['score'],
